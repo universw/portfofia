@@ -416,3 +416,26 @@ body.dark-mode .chat-message {
   margin-left: auto;
   text-align: right;
 }
+.chat-message {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  margin: 0.4rem 0;
+  max-width: 80%;
+  word-break: break-word;
+}
+
+.user-message {
+  background-color: #eee;
+  text-align: left;
+}
+
+.admin-message {
+  background-color: #007bff;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
+#chat-messages {
+  display: flex;
+  flex-direction: column;
+}
