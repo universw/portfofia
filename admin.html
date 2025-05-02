@@ -9,6 +9,7 @@
 <body>
 
   <h2>Admin Reply Panel</h2>
+
   <div id="chat-messages"></div>
 
   <form id="reply-form">
@@ -16,41 +17,53 @@
     <button type="submit">Send</button>
   </form>
 
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDjo6SjdfLCNtNN4lT8aKORY7CIP-WJH9U",
-      authDomain: "portfofia.firebaseapp.com",
-      databaseURL: "https://portfofia-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "portfofia",
-      storageBucket: "portfofia.firebasestorage.app",
-      messagingSenderId: "633781124250",
-      appId: "1:633781124250:web:c6680357071539a254f323"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database().ref("chatbox");
+    window.onload = function () {
+      const firebaseConfig = {
+        apiKey: "AIzaSyDjo6SjdfLCNtNN4lT8aKORY7CIP-WJH9U",
+        authDomain: "portfofia.firebaseapp.com",
+        databaseURL: "https://portfofia-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "portfofia",
+        storageBucket: "portfofia.firebasestorage.app",
+        messagingSenderId: "633781124250",
+        appId: "1:633781124250:web:c6680357071539a254f323"
+      };
 
-    db.on("child_added", snapshot => {
-      const data = snapshot.val();
-      const div = document.createElement("div");
-      div.className = data.sender === "admin" ? "admin-message" : "user-message";
-      div.textContent = data.text;
-      document.getElementById("chat-messages").appendChild(div);
-    });
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database().ref("chatbox");
 
-    document.getElementById("reply-form").addEventListener("submit", e => {
-      e.preventDefault();
-      const message = document.getElementById("admin-input").value.trim();
-      if (!message) return;
-      db.push({
-        text: message,
-        sender: "admin",
-        timestamp: Date.now()
+      const chatBox = document.getElementById("chat-messages");
+      const input = document.getElementById("admin-input");
+
+      // Display messages
+      db.on("child_added", snapshot => {
+        const data = snapshot.val();
+        const div = document.createElement("div");
+        div.className = data.sender === "admin" ? "chat-message admin-message" : "chat-message user-message";
+        div.textContent = data.text;
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
       });
-      document.getElementById("admin-input").value = "";
-    });
+
+      // Send admin reply
+      document.getElementById("reply-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const message = input.value.trim();
+        if (!message) return;
+
+        db.push({
+          text: message,
+          sender: "admin",
+          timestamp: Date.now()
+        });
+
+        input.value = "";
+      });
+    };
   </script>
 </body>
 </html>

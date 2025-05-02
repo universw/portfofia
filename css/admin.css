@@ -1,7 +1,11 @@
 body {
     font-family: Arial, sans-serif;
     padding: 2rem;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;
   }
   
   #chat-messages {
@@ -9,27 +13,29 @@ body {
     padding: 1rem;
     height: 300px;
     overflow-y: auto;
-    margin-bottom: 1rem;
     background: white;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-message {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    margin: 0.3rem 0;
+    max-width: 70%;
+    word-break: break-word;
   }
   
   .user-message {
-    background: #eee;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    margin: 0.3rem 0;
-    max-width: 70%;
+    background-color: #eee;
+    align-self: flex-start;
   }
   
   .admin-message {
-    background: #007bff;
+    background-color: #007bff;
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    margin: 0.3rem 0;
-    max-width: 70%;
-    margin-left: auto;
-    text-align: right;
+    align-self: flex-end;
   }
   
   #reply-form {
@@ -40,6 +46,8 @@ body {
   #admin-input {
     flex: 1;
     padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
   }
   
   button {
@@ -47,8 +55,8 @@ body {
     background: #007bff;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
   }
   
   button:hover {
