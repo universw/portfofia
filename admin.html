@@ -8,59 +8,136 @@
 </head>
 <body>
 
-  <h2>Live Chat Messages</h2>
-  <div id="chat-messages"></div>
+  <h1>Admin Panel</h1>
 
-  <form id="reply-form">
+  <!-- AUTH SECTION -->
+  <div id="auth-section">
+    <button id="login-btn">Sign in with Google</button>
+    <button id="logout-btn" style="display: none;">Sign Out</button>
+    <p id="admin-email"></p>
+  </div>
+
+  <!-- CHAT SECTION -->
+  <h2>Live Chat Messages</h2>
+  <div id="chat-messages" style="display: none;"></div>
+
+  <form id="reply-form" style="display: none;">
     <input type="text" id="admin-input" placeholder="Type admin reply..." required />
     <button type="submit">Send</button>
   </form>
 
   <hr style="margin: 3rem 0;" />
 
+  <!-- CONTACT SECTION -->
   <h2>Contact Form Submissions</h2>
-  <div id="contact-messages"></div>
+  <div id="contact-messages" style="display: none;"></div>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
   <script>
     window.onload = function () {
-      // Firebase Config
+      // Firebase config
       const firebaseConfig = {
         apiKey: "AIzaSyDjo6SjdfLCNtNN4lT8aKORY7CIP-WJH9U",
         authDomain: "portfofia.firebaseapp.com",
         databaseURL: "https://portfofia-default-rtdb.asia-southeast1.firebasedatabase.app",
         projectId: "portfofia",
-        storageBucket: "portfofia.firebasestorage.app",
+        storageBucket: "portfofia.appspot.com",
         messagingSenderId: "633781124250",
         appId: "1:633781124250:web:c6680357071539a254f323"
       };
 
-      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       const db = firebase.database();
+      const auth = firebase.auth();
 
-      // === Live Chat Handling ===
+      const allowedEmail = "jmiaakgasxomhprmut@gmail.com";
+
+      const loginBtn = document.getElementById("login-btn");
+      const logoutBtn = document.getElementById("logout-btn");
+      const emailDisplay = document.getElementById("admin-email");
+
       const chatRef = db.ref("chatbox");
-      const chatBox = document.getElementById("chat-messages");
-      const input = document.getElementById("admin-input");
+      const contactRef = db.ref("contacts");
 
-      // Load Chat Messages
-      chatRef.on("child_added", snapshot => {
-        const data = snapshot.val();
-        const div = document.createElement("div");
-        div.className = data.sender === "admin" ? "chat-message admin-message" : "chat-message user-message";
-        div.textContent = data.text;
-        chatBox.appendChild(div);
-        chatBox.scrollTop = chatBox.scrollHeight;
+      const chatBox = document.getElementById("chat-messages");
+      const contactBox = document.getElementById("contact-messages");
+      const replyForm = document.getElementById("reply-form");
+      const adminInput = document.getElementById("admin-input");
+
+      loginBtn.onclick = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).then(result => {
+          if (result.user.email !== allowedEmail) {
+            alert("Access denied.");
+            auth.signOut();
+          }
+        });
+      };
+
+      logoutBtn.onclick = () => {
+        auth.signOut();
+      };
+
+      auth.onAuthStateChanged(user => {
+        if (user && user.email === allowedEmail) {
+          emailDisplay.textContent = `Logged in as: ${user.email}`;
+          loginBtn.style.display = "none";
+          logoutBtn.style.display = "inline";
+
+          chatBox.style.display = "flex";
+          contactBox.style.display = "block";
+          replyForm.style.display = "flex";
+
+          loadChat();
+          loadContacts();
+        } else {
+          emailDisplay.textContent = "";
+          loginBtn.style.display = "inline";
+          logoutBtn.style.display = "none";
+
+          chatBox.style.display = "none";
+          contactBox.style.display = "none";
+          replyForm.style.display = "none";
+        }
       });
 
-      // Send admin reply
-      document.getElementById("reply-form").addEventListener("submit", e => {
+      // Load Chat Messages
+      function loadChat() {
+        chatBox.innerHTML = "";
+        chatRef.on("child_added", snapshot => {
+          const data = snapshot.val();
+          const div = document.createElement("div");
+          div.className = data.sender === "admin" ? "chat-message admin-message" : "chat-message user-message";
+          div.textContent = data.text;
+          chatBox.appendChild(div);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        });
+      }
+
+      // Load Contact Messages
+      function loadContacts() {
+        contactBox.innerHTML = "";
+        contactRef.on("child_added", snapshot => {
+          const data = snapshot.val();
+          const div = document.createElement("div");
+          div.className = "contact-entry";
+          div.innerHTML = `
+            <strong>${data.name}</strong> (${data.email})<br/>
+            ${data.message}
+            <hr/>
+          `;
+          contactBox.appendChild(div);
+        });
+      }
+
+      // Send Admin Reply
+      replyForm.addEventListener("submit", e => {
         e.preventDefault();
-        const message = input.value.trim();
+        const message = adminInput.value.trim();
         if (!message) return;
 
         chatRef.push({
@@ -69,23 +146,7 @@
           timestamp: Date.now()
         });
 
-        input.value = "";
-      });
-
-      // === Contact Form Submissions Viewer ===
-      const contactRef = db.ref("contacts");
-      const contactBox = document.getElementById("contact-messages");
-
-      contactRef.on("child_added", (snapshot) => {
-        const data = snapshot.val();
-        const div = document.createElement("div");
-        div.className = "contact-entry";
-        div.innerHTML = `
-          <strong>${data.name}</strong> (${data.email})<br/>
-          ${data.message}
-          <hr/>
-        `;
-        contactBox.appendChild(div);
+        adminInput.value = "";
       });
     };
   </script>
