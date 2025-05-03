@@ -59,7 +59,10 @@
       const db = firebase.database();
       const auth = firebase.auth();
 
-      const allowedEmails = ["jmiaakgasxomhprmut@gmail.com","henryhoangquanw@gmail.com","hennryhoangquanw@tmail.ne.jp"];
+      const allowedEmails = [
+      "jmiaakgasxomhprmut@gmail.com",
+      "henryhoangquanw@gmail.com",
+      "hennryhoangquanw@tmail.ne.jp"];
 
       const loginBtn = document.getElementById("login-btn");
       const logoutBtn = document.getElementById("logout-btn");
@@ -90,26 +93,28 @@
         auth.signOut();
       };
 
-      auth.onAuthStateChanged(user => {
-        const isAdmin = user && user.email === allowedEmail;
+            auth.onAuthStateChanged(user => {
+      const isAdmin = user && allowedEmails.includes(user.email);
 
-        loginBtn.style.display = isAdmin ? "none" : "inline";
-        logoutBtn.style.display = isAdmin ? "inline" : "none";
-        emailDisplay.textContent = isAdmin ? `Logged in as: ${user.email}` : "";
+      loginBtn.style.display = isAdmin ? "none" : "inline";
+      logoutBtn.style.display = isAdmin ? "inline" : "none";
+      emailDisplay.textContent = isAdmin ? `Logged in as: ${user.email}` : "";
 
-        chatBox.style.display = isAdmin ? "flex" : "none";
-        replyForm.style.display = isAdmin ? "flex" : "none";
-        clearChatBtn.style.display = isAdmin ? "inline" : "none";
+       chatBox.style.display = isAdmin ? "flex" : "none";
+       replyForm.style.display = isAdmin ? "flex" : "none";
+       clearChatBtn.style.display = isAdmin ? "inline" : "none";
 
-        contactBox.style.display = isAdmin ? "block" : "none";
-        clearContactsBtn.style.display = isAdmin ? "inline" : "none";
+      contactBox.style.display = isAdmin ? "block" : "none";
+      clearContactsBtn.style.display = isAdmin ? "inline" : "none";
 
-        if (isAdmin) {
-          loadChat();
-          loadContacts();
-        }
-      });
-
+      if (isAdmin) {
+         loadChat();
+         loadContacts();
+       } else if (user) {
+       alert("Access denied.");
+       auth.signOut();
+     }
+    });
       function loadChat() {
         chatBox.innerHTML = "";
         chatRef.on("child_added", snapshot => {
