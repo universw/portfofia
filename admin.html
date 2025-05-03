@@ -25,8 +25,6 @@
     <input type="text" id="admin-input" placeholder="Type admin reply..." required />
     <button type="submit">Send</button>
   </form>
-
-  <!-- CLEAR CHAT BUTTON -->
   <button id="clear-chat" class="btn" style="display: none; margin-top: 1rem;">Clear All Chat</button>
 
   <hr style="margin: 3rem 0;" />
@@ -34,8 +32,6 @@
   <!-- CONTACT SECTION -->
   <h2>Contact Form Submissions</h2>
   <div id="contact-messages" style="display: none;"></div>
-
-  <!-- CLEAR CONTACTS BUTTON -->
   <button id="clear-contacts" class="btn" style="display: none; margin-top: 1rem;">Clear All Contacts</button>
 
   <!-- Firebase SDKs -->
@@ -60,9 +56,9 @@
       const auth = firebase.auth();
 
       const allowedEmails = [
-      "jmiaakgasxomhprmut@gmail.com",
-      "henryhoangquanw@gmail.com",
-      "hennryhoangquanw@tmail.ne.jp"];
+        "hennryhoangquanw@ymail.ne.jp",
+        "your.otheradmin@gmail.com"
+      ];
 
       const loginBtn = document.getElementById("login-btn");
       const logoutBtn = document.getElementById("logout-btn");
@@ -82,7 +78,7 @@
       loginBtn.onclick = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider).then(result => {
-          if (result.user.email !== allowedEmail) {
+          if (!allowedEmails.includes(result.user.email)) {
             alert("Access denied.");
             auth.signOut();
           }
@@ -93,30 +89,33 @@
         auth.signOut();
       };
 
-            auth.onAuthStateChanged(user => {
-      const isAdmin = user && allowedEmails.includes(user.email);
+      auth.onAuthStateChanged(user => {
+        const isAdmin = user && allowedEmails.includes(user.email);
 
-      loginBtn.style.display = isAdmin ? "none" : "inline";
-      logoutBtn.style.display = isAdmin ? "inline" : "none";
-      emailDisplay.textContent = isAdmin ? `Logged in as: ${user.email}` : "";
+        loginBtn.style.display = isAdmin ? "none" : "inline";
+        logoutBtn.style.display = isAdmin ? "inline" : "none";
+        emailDisplay.textContent = isAdmin ? `Logged in as: ${user.email}` : "";
 
-       chatBox.style.display = isAdmin ? "flex" : "none";
-       replyForm.style.display = isAdmin ? "flex" : "none";
-       clearChatBtn.style.display = isAdmin ? "inline" : "none";
+        chatBox.style.display = isAdmin ? "flex" : "none";
+        replyForm.style.display = isAdmin ? "flex" : "none";
+        clearChatBtn.style.display = isAdmin ? "inline" : "none";
 
-      contactBox.style.display = isAdmin ? "block" : "none";
-      clearContactsBtn.style.display = isAdmin ? "inline" : "none";
+        contactBox.style.display = isAdmin ? "block" : "none";
+        clearContactsBtn.style.display = isAdmin ? "inline" : "none";
 
-      if (isAdmin) {
-         loadChat();
-         loadContacts();
-       } else if (user) {
-       alert("Access denied.");
-       auth.signOut();
-     }
-    });
+        if (isAdmin) {
+          loadChat();
+          loadContacts();
+        } else if (user) {
+          alert("Access denied.");
+          auth.signOut();
+        }
+      });
+
       function loadChat() {
         chatBox.innerHTML = "";
+        chatRef.off("child_added");
+
         chatRef.on("child_added", snapshot => {
           const data = snapshot.val();
           const key = snapshot.key;
@@ -146,6 +145,8 @@
 
       function loadContacts() {
         contactBox.innerHTML = "";
+        contactRef.off("child_added");
+
         contactRef.on("child_added", snapshot => {
           const data = snapshot.val();
           const key = snapshot.key;
