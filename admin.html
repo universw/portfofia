@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Chat Panel</title>
+  <title>Admin Panel</title>
   <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
@@ -26,11 +26,17 @@
     <button type="submit">Send</button>
   </form>
 
+  <!-- CLEAR CHAT BUTTON -->
+  <button id="clear-chat" class="btn" style="display: none; margin-top: 1rem;">Clear All Chat</button>
+
   <hr style="margin: 3rem 0;" />
 
   <!-- CONTACT SECTION -->
   <h2>Contact Form Submissions</h2>
   <div id="contact-messages" style="display: none;"></div>
+
+  <!-- CLEAR CONTACTS BUTTON -->
+  <button id="clear-contacts" class="btn" style="display: none; margin-top: 1rem;">Clear All Contacts</button>
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -39,7 +45,6 @@
 
   <script>
     window.onload = function () {
-      // Firebase config
       const firebaseConfig = {
         apiKey: "AIzaSyDjo6SjdfLCNtNN4lT8aKORY7CIP-WJH9U",
         authDomain: "portfofia.firebaseapp.com",
@@ -54,7 +59,7 @@
       const db = firebase.database();
       const auth = firebase.auth();
 
-      const allowedEmail = "jmiaakgasxomhprmut@gmail.com";
+      const allowedEmail = "hennryhoangquanw@ymail.ne.jp";
 
       const loginBtn = document.getElementById("login-btn");
       const logoutBtn = document.getElementById("logout-btn");
@@ -67,6 +72,9 @@
       const contactBox = document.getElementById("contact-messages");
       const replyForm = document.getElementById("reply-form");
       const adminInput = document.getElementById("admin-input");
+
+      const clearChatBtn = document.getElementById("clear-chat");
+      const clearContactsBtn = document.getElementById("clear-contacts");
 
       loginBtn.onclick = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -83,58 +91,80 @@
       };
 
       auth.onAuthStateChanged(user => {
-        if (user && user.email === allowedEmail) {
-          emailDisplay.textContent = `Logged in as: ${user.email}`;
-          loginBtn.style.display = "none";
-          logoutBtn.style.display = "inline";
+        const isAdmin = user && user.email === allowedEmail;
 
-          chatBox.style.display = "flex";
-          contactBox.style.display = "block";
-          replyForm.style.display = "flex";
+        loginBtn.style.display = isAdmin ? "none" : "inline";
+        logoutBtn.style.display = isAdmin ? "inline" : "none";
+        emailDisplay.textContent = isAdmin ? `Logged in as: ${user.email}` : "";
 
+        chatBox.style.display = isAdmin ? "flex" : "none";
+        replyForm.style.display = isAdmin ? "flex" : "none";
+        clearChatBtn.style.display = isAdmin ? "inline" : "none";
+
+        contactBox.style.display = isAdmin ? "block" : "none";
+        clearContactsBtn.style.display = isAdmin ? "inline" : "none";
+
+        if (isAdmin) {
           loadChat();
           loadContacts();
-        } else {
-          emailDisplay.textContent = "";
-          loginBtn.style.display = "inline";
-          logoutBtn.style.display = "none";
-
-          chatBox.style.display = "none";
-          contactBox.style.display = "none";
-          replyForm.style.display = "none";
         }
       });
 
-      // Load Chat Messages
       function loadChat() {
         chatBox.innerHTML = "";
         chatRef.on("child_added", snapshot => {
           const data = snapshot.val();
+          const key = snapshot.key;
+
           const div = document.createElement("div");
           div.className = data.sender === "admin" ? "chat-message admin-message" : "chat-message user-message";
-          div.textContent = data.text;
+
+          const span = document.createElement("span");
+          span.textContent = data.text;
+
+          const delBtn = document.createElement("button");
+          delBtn.textContent = "Delete";
+          delBtn.className = "delete-btn";
+          delBtn.onclick = () => {
+            if (confirm("Delete this message?")) {
+              chatRef.child(key).remove();
+              div.remove();
+            }
+          };
+
+          div.appendChild(span);
+          div.appendChild(delBtn);
           chatBox.appendChild(div);
           chatBox.scrollTop = chatBox.scrollHeight;
         });
       }
 
-      // Load Contact Messages
       function loadContacts() {
         contactBox.innerHTML = "";
         contactRef.on("child_added", snapshot => {
           const data = snapshot.val();
+          const key = snapshot.key;
+
           const div = document.createElement("div");
           div.className = "contact-entry";
-          div.innerHTML = `
-            <strong>${data.name}</strong> (${data.email})<br/>
-            ${data.message}
-            <hr/>
-          `;
+          div.innerHTML = `<strong>${data.name}</strong> (${data.email})<br/>${data.message}`;
+
+          const delBtn = document.createElement("button");
+          delBtn.textContent = "Delete";
+          delBtn.className = "delete-btn";
+          delBtn.onclick = () => {
+            if (confirm("Delete this contact entry?")) {
+              contactRef.child(key).remove();
+              div.remove();
+            }
+          };
+
+          div.appendChild(document.createElement("hr"));
+          div.appendChild(delBtn);
           contactBox.appendChild(div);
         });
       }
 
-      // Send Admin Reply
       replyForm.addEventListener("submit", e => {
         e.preventDefault();
         const message = adminInput.value.trim();
@@ -148,6 +178,20 @@
 
         adminInput.value = "";
       });
+
+      clearChatBtn.onclick = () => {
+        if (confirm("Clear all chat messages?")) {
+          chatRef.remove();
+          chatBox.innerHTML = "";
+        }
+      };
+
+      clearContactsBtn.onclick = () => {
+        if (confirm("Clear all contact messages?")) {
+          contactRef.remove();
+          contactBox.innerHTML = "";
+        }
+      };
     };
   </script>
 </body>

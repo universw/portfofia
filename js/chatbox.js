@@ -4,7 +4,7 @@ const firebaseConfig = {
   authDomain: "portfofia.firebaseapp.com",
   databaseURL: "https://portfofia-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "portfofia",
-  storageBucket: "portfofia.firebasestorage.app",
+  storageBucket: "portfofia.appspot.com",
   messagingSenderId: "633781124250",
   appId: "1:633781124250:web:c6680357071539a254f323"
 };
@@ -18,35 +18,53 @@ const chatRef = db.ref("chatbox");
 const chatForm = document.getElementById("chat-form");
 const chatInput = document.getElementById("chat-input");
 const chatMessages = document.getElementById("chat-messages");
+const clearBtn = document.getElementById("clear-chat");
 
-// Send message from user
+// Submit user message
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const messageText = chatInput.value.trim();
-
-  if (messageText) {
+  const message = chatInput.value.trim();
+  if (message) {
     chatRef.push({
-      text: messageText,
+      text: message,
       sender: "user",
       timestamp: Date.now()
     });
-
     chatInput.value = "";
     chatInput.focus();
   }
 });
 
-// Listen and show messages
-chatRef.limitToLast(50).on("child_added", (snapshot) => {
+// Load chat messages with delete option
+chatRef.on("child_added", (snapshot) => {
   const data = snapshot.val();
-  displayMessage(data.text, data.sender);
-});
-
-function displayMessage(text, sender) {
+  const key = snapshot.key;
   const div = document.createElement("div");
-  div.textContent = text;
-  div.classList.add("chat-message");
-  div.classList.add(sender === "admin" ? "admin-message" : "user-message");
+  div.className = data.sender === "admin" ? "chat-message admin-message" : "chat-message user-message";
+
+  const span = document.createElement("span");
+  span.textContent = data.text;
+
+  const delBtn = document.createElement("button");
+  delBtn.textContent = "Delete";
+  delBtn.className = "delete-btn";
+  delBtn.onclick = () => {
+    if (confirm("Delete this message?")) {
+      chatRef.child(key).remove();
+      div.remove();
+    }
+  };
+
+  div.appendChild(span);
+  div.appendChild(delBtn);
   chatMessages.appendChild(div);
   chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+});
+
+// Clear all messages
+clearBtn.addEventListener("click", () => {
+  if (confirm("Clear all chat messages?")) {
+    chatRef.remove();
+    chatMessages.innerHTML = "";
+  }
+});

@@ -191,3 +191,26 @@ button:hover {
   border-left: 4px solid #007bff;
   font-size: 0.95rem;
 }
+.delete-btn {
+  margin-left: 1rem;
+  padding: 4px 10px;
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}
+
+.contact-entry {
+  background: #f9f9f9;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #007bff;
+  font-size: 0.95rem;
+  border-radius: 6px;
+}
