@@ -1,4 +1,4 @@
-// Firebase config
+// ================== Firebase Config ==================
 const firebaseConfig = {
   apiKey: "AIzaSyDjo6SjdfLCNtNN4lT8aKORY7CIP-WJH9U",
   authDomain: "portfofia.firebaseapp.com",
@@ -9,18 +9,16 @@ const firebaseConfig = {
   appId: "1:633781124250:web:c6680357071539a254f323"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const auth = firebase.auth();
 const chatRef = db.ref("chatbox");
 
-// DOM Elements
+// ================== Chat Messaging ==================
 const chatForm = document.getElementById("chat-form");
 const chatInput = document.getElementById("chat-input");
 const chatMessages = document.getElementById("chat-messages");
 
-// Submit chat message
 chatForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   const message = chatInput.value.trim();
@@ -35,7 +33,6 @@ chatForm?.addEventListener("submit", (e) => {
   }
 });
 
-// Display chat messages
 chatRef.on("child_added", (snapshot) => {
   const data = snapshot.val();
   const key = snapshot.key;
@@ -62,29 +59,23 @@ chatRef.on("child_added", (snapshot) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-// ===== AUTHENTICATION =====
-
-// Email Login
+// ================== Authentication ==================
 function loginWithEmail() {
   const email = document.getElementById("user-email").value;
   const password = document.getElementById("user-password").value;
-
   auth.signInWithEmailAndPassword(email, password)
-    .then(userCred => alert("Logged in as: " + userCred.user.email))
+    .then(user => alert("Logged in: " + user.user.email))
     .catch(err => alert(err.message));
 }
 
-// Email Sign-Up
 function signUpWithEmail() {
   const email = document.getElementById("user-email").value;
   const password = document.getElementById("user-password").value;
-
   auth.createUserWithEmailAndPassword(email, password)
-    .then(userCred => alert("Signed up as: " + userCred.user.email))
+    .then(user => alert("Signed up: " + user.user.email))
     .catch(err => alert(err.message));
 }
 
-// Google Login
 function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider)
@@ -92,7 +83,6 @@ function loginWithGoogle() {
     .catch(err => alert(err.message));
 }
 
-// GitHub Login
 function loginWithGithub() {
   const provider = new firebase.auth.GithubAuthProvider();
   auth.signInWithPopup(provider)
@@ -100,21 +90,28 @@ function loginWithGithub() {
     .catch(err => alert(err.message));
 }
 
-// Logout
+function loginWithFacebook() {
+  const provider = new firebase.auth.FacebookAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result => alert("Facebook login: " + result.user.displayName))
+    .catch(err => alert(err.message));
+}
+
 function userLogout() {
   auth.signOut()
     .then(() => alert("Logged out"))
     .catch(err => alert(err.message));
 }
 
-// Expose functions to window
+// Make functions global
 window.loginWithEmail = loginWithEmail;
 window.signUpWithEmail = signUpWithEmail;
 window.loginWithGoogle = loginWithGoogle;
 window.loginWithGithub = loginWithGithub;
+window.loginWithFacebook = loginWithFacebook;
 window.userLogout = userLogout;
 
-// Handle login state
+// ================== UI Toggle by Login State ==================
 auth.onAuthStateChanged((user) => {
   const contactForm = document.getElementById("contact-form");
   const chatboxSection = document.getElementById("chatbox");

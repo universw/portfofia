@@ -51,12 +51,14 @@ header {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .header-left {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex: 1;
 }
 
 .profile-pic {
@@ -64,7 +66,6 @@ header {
   height: 65px;
   border-radius: 50%;
   border: 3px solid white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   object-fit: cover;
 }
 
@@ -86,8 +87,9 @@ header {
 /* =============== NAVIGATION =============== */
 .nav-bar {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .nav-bar a {
@@ -104,7 +106,7 @@ header {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* =============== LANGUAGE + THEME CONTROLS =============== */
+/* =============== CONTROLS =============== */
 .controls {
   display: flex;
   align-items: center;
@@ -131,7 +133,6 @@ header {
 .section {
   padding: 4rem 0;
   text-align: center;
-  animation: fadeIn 1s ease;
 }
 
 .section h2 {
@@ -140,12 +141,7 @@ header {
   margin-bottom: 1.5rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
-}
-
-/* =============== BUTTON =============== */
+/* =============== BUTTONS =============== */
 .btn {
   display: inline-block;
   background: var(--primary-color);
@@ -163,7 +159,7 @@ header {
   background-color: #0056b3;
 }
 
-/* =============== SKILLS =============== */
+/* =============== SKILLS LIST =============== */
 .skills-list {
   display: flex;
   flex-wrap: wrap;
@@ -213,6 +209,7 @@ header {
 .snake-container {
   margin-top: 2rem;
 }
+
 .snake-iframe {
   width: 100%;
   max-width: 500px;
@@ -236,7 +233,9 @@ header {
   align-items: center;
   gap: 0.8rem;
 }
-#contact-form input, #contact-form textarea {
+
+#contact-form input,
+#contact-form textarea {
   width: 100%;
   max-width: 500px;
   padding: 0.8rem;
@@ -251,6 +250,7 @@ header {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
 #chat-messages {
   max-height: 300px;
   overflow-y: auto;
@@ -261,24 +261,30 @@ header {
   display: flex;
   flex-direction: column;
 }
+
 .chat-message {
   padding: 0.7rem 1rem;
   border-radius: 10px;
   margin: 0.4rem 0;
   max-width: 80%;
   word-break: break-word;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-}
+
 .chat-message.user-message {
   background-color: #eee;
   text-align: left;
 }
+
 .chat-message.admin-message {
   background-color: #007bff;
   color: white;
   margin-left: auto;
   text-align: right;
 }
+
 .delete-btn {
   background: #e74c3c;
   color: white;
@@ -288,7 +294,40 @@ header {
   cursor: pointer;
 }
 
-/* =============== LOGIN BOX =============== */
+/* =============== LOGIN & SIGNUP BOX =============== */
+#user-login {
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#user-login input,
+#user-login button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+#user-login button {
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+#user-login button:hover {
+  background-color: #3367D6;
+}
+
+/* =============== LOGIN REMINDER BOX =============== */
 .reminder-box {
   background-color: #fff3cd;
   border: 1px solid #ffeeba;
@@ -300,34 +339,6 @@ header {
   text-align: center;
   box-shadow: 0 0 8px rgba(0,0,0,0.05);
 }
-#user-login {
-  background: #f4f4f4;
-  border: 1px solid #ccc;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: 2rem auto;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-#user-login input,
-#user-login button {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-#user-login button {
-  background-color: #4285F4;
-  color: white;
-  border: none;
-  transition: background 0.3s ease;
-}
-#user-login button:hover {
-  background-color: #3367D6;
-}
 
 /* =============== FOOTER =============== */
 .footer {
@@ -338,7 +349,7 @@ header {
   border-top: 1px solid #ccc;
 }
 
-/* =============== RESPONSIVE =============== */
+/* =============== RESPONSIVE FIXES =============== */
 @media (max-width: 768px) {
   .header-container,
   .header-left,
@@ -360,9 +371,4 @@ header {
   .nav-bar a {
     padding: 6px;
   }
-}
-.reminder-box{
-  text-align: center; 
-  color: red; 
-  margin-top: 2rem;
 }
