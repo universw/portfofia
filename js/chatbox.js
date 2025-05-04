@@ -15,13 +15,13 @@ const db = firebase.database();
 const auth = firebase.auth();
 const chatRef = db.ref("chatbox");
 
-// DOM elements
+// DOM Elements
 const chatForm = document.getElementById("chat-form");
 const chatInput = document.getElementById("chat-input");
 const chatMessages = document.getElementById("chat-messages");
 
-// Submit message
-chatForm.addEventListener("submit", (e) => {
+// Submit chat message
+chatForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   const message = chatInput.value.trim();
   if (message) {
@@ -35,7 +35,7 @@ chatForm.addEventListener("submit", (e) => {
   }
 });
 
-// Load chat messages
+// Display chat messages
 chatRef.on("child_added", (snapshot) => {
   const data = snapshot.val();
   const key = snapshot.key;
@@ -62,11 +62,9 @@ chatRef.on("child_added", (snapshot) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-// ===========================
-// Firebase Authentication
-// ===========================
+// ===== AUTHENTICATION =====
 
-// Login with Email/Password
+// Email Login
 function loginWithEmail() {
   const email = document.getElementById("user-email").value;
   const password = document.getElementById("user-password").value;
@@ -76,7 +74,7 @@ function loginWithEmail() {
     .catch(err => alert(err.message));
 }
 
-// Sign up with Email/Password
+// Email Sign-Up
 function signUpWithEmail() {
   const email = document.getElementById("user-email").value;
   const password = document.getElementById("user-password").value;
@@ -86,7 +84,7 @@ function signUpWithEmail() {
     .catch(err => alert(err.message));
 }
 
-// Login with Google
+// Google Login
 function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider)
@@ -94,7 +92,7 @@ function loginWithGoogle() {
     .catch(err => alert(err.message));
 }
 
-// Login with GitHub
+// GitHub Login
 function loginWithGithub() {
   const provider = new firebase.auth.GithubAuthProvider();
   auth.signInWithPopup(provider)
@@ -109,21 +107,26 @@ function userLogout() {
     .catch(err => alert(err.message));
 }
 
-// Show/Hide sections based on auth state
+// Expose functions to window
+window.loginWithEmail = loginWithEmail;
+window.signUpWithEmail = signUpWithEmail;
+window.loginWithGoogle = loginWithGoogle;
+window.loginWithGithub = loginWithGithub;
+window.userLogout = userLogout;
+
+// Handle login state
 auth.onAuthStateChanged((user) => {
-  const chatSection = document.getElementById("chatbox");
   const contactForm = document.getElementById("contact-form");
-  const loginReminder = document.getElementById("login-reminder");
+  const chatboxSection = document.getElementById("chatbox");
+  const reminder = document.getElementById("login-reminder");
 
   if (user) {
-    console.log("User logged in:", user.email || user.displayName);
-    if (chatSection) chatSection.style.display = "block";
     if (contactForm) contactForm.style.display = "block";
-    if (loginReminder) loginReminder.style.display = "none";
+    if (chatboxSection) chatboxSection.style.display = "block";
+    if (reminder) reminder.style.display = "none";
   } else {
-    console.log("No user is logged in.");
-    if (chatSection) chatSection.style.display = "none";
     if (contactForm) contactForm.style.display = "none";
-    if (loginReminder) loginReminder.style.display = "block";
+    if (chatboxSection) chatboxSection.style.display = "none";
+    if (reminder) reminder.style.display = "block";
   }
 });
