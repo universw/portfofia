@@ -361,3 +361,8 @@ header {
     padding: 6px;
   }
 }
+.reminder-box{
+  text-align: center; 
+  color: red; 
+  margin-top: 2rem;
+}
