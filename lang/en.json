@@ -50,6 +50,13 @@
   "linkedin_link": "LinkedIn",
   "facebook_link": "Facebook",
   "login_reminder": "Please log in or sign up to use the contact form and chat features.",
+  "auth_section_title": "User Login & Signup",
+  "signup_btn": "Sign Up",
+  "login_btn": "Login",
+  "google_login_btn": "Login with Google",
+  "github_login_btn": "Login with GitHub",
+  "facebook_login_btn": "Login with Facebook",
+  "logout_btn": "Logout",
   "chatbox_title": "Live Chat",
   "footer": "© 2025 Henry HoangQuan Nguyen. All rights reserved."
 }

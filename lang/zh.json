@@ -50,6 +50,13 @@
   "linkedin_link": "LinkedIn",
   "facebook_link": "Facebook",
   "login_reminder": "请登录或注册以使用联系表单和聊天功能。",
+  "auth_section_title": "用户登录与注册",
+  "signup_btn": "注册",
+  "login_btn": "登录",
+  "google_login_btn": "使用 Google 登录",
+  "github_login_btn": "使用 GitHub 登录",
+  "facebook_login_btn": "使用 Facebook 登录",
+  "logout_btn": "登出",
   "chatbox_title": "实时聊天",
   "footer": "© 2025年 亨利·黄军。版权所有。"
 }

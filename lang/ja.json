@@ -50,6 +50,13 @@
   "linkedin_link": "LinkedIn",
   "facebook_link": "Facebook",
   "login_reminder": "お問い合わせフォームとチャット機能を利用するには、ログインまたはサインアップしてください。",
+  "auth_section_title": "ユーザーログインとサインアップ",
+  "signup_btn": "サインアップ",
+  "login_btn": "ログイン",
+  "google_login_btn": "Googleでログイン",
+  "github_login_btn": "GitHubでログイン",
+  "facebook_login_btn": "Facebookでログイン",
+  "logout_btn": "ログアウト",
   "chatbox_title": "ライブチャット",
   "footer": "© 2025年 ヘンリー・ホアン・クアン・グエン。無断複写・転載を禁じます。"
 }

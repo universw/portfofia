@@ -50,6 +50,13 @@
   "linkedin_link": "LinkedIn",
   "facebook_link": "Facebook",
   "login_reminder": "Vui lòng đăng nhập hoặc đăng ký để sử dụng biểu mẫu liên hệ và trò chuyện.",
+  "auth_section_title": "Đăng nhập & Đăng ký người dùng",
+  "signup_btn": "Đăng ký",
+  "login_btn": "Đăng nhập",
+  "google_login_btn": "Đăng nhập bằng Google",
+  "github_login_btn": "Đăng nhập bằng GitHub",
+  "facebook_login_btn": "Đăng nhập bằng Facebook",
+  "logout_btn": "Đăng xuất",
   "chatbox_title": "Trò chuyện trực tuyến",
   "footer": "© 2025 Henry HoangQuan Nguyen. Mọi quyền được bảo lưu."
 }
