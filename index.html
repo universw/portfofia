@@ -1,4 +1,11 @@
-<header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfofia</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+ <header>
   <div class="container header-container">
     <div class="header-left">
       <img src="assets/images/profile.jpg" alt="Profile" class="profile-pic" />
@@ -192,6 +199,15 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDjo6SjdfLCNtNN4lT8aKORY7CIP-WJH9U",
+      authDomain: "portfofia.firebaseapp.com",
+      databaseURL: "https://portfofia-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "portfofia"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
   
   <!-- Custom Scripts -->
   <script src="js/lang.js"></script>
