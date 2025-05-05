@@ -26,6 +26,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   transition: background-color 0.5s, color 0.5s;
+  overflow-x: hidden;
 }
 
 .container {
@@ -112,7 +113,8 @@ header {
   gap: 0.8rem;
 }
 
-#lang-switcher, #theme-toggle {
+#lang-switcher,
+#theme-toggle {
   padding: 6px 10px;
   font-size: 0.9rem;
   border-radius: 6px;
@@ -175,28 +177,31 @@ header {
 }
 
 /* =============== GALLERY / PROJECTS =============== */
-.gallery-grid, .projects-grid {
+.gallery-grid,
+.projects-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
 }
 
-.gallery-item, .project-item {
+.gallery-item,
+.project-item {
   width: 260px;
 }
 
-.gallery-item img, .project-item img {
+.gallery-item img,
+.project-item img {
   width: 100%;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .project-item {
   background: var(--bg-color);
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s;
 }
 
@@ -247,7 +252,7 @@ header {
   background: var(--bg-color);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #chat-messages {
@@ -302,7 +307,7 @@ header {
   max-width: 400px;
   margin: 2rem auto;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #user-login input,
@@ -336,7 +341,7 @@ header {
   margin: 2rem auto;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
 /* =============== FOOTER =============== */
@@ -348,50 +353,58 @@ header {
   border-top: 1px solid #ccc;
 }
 
-/* =============== RESPONSIVE FIXES =============== */
+/* =============== MOBILE RESPONSIVE FIXES =============== */
 @media (max-width: 768px) {
-  .header-container,
-  .header-left,
-  .nav-bar,
-  .gallery-grid,
-  .projects-grid,
-  .skills-list,
-  .social-buttons {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  header {
+    padding: 0.3rem 0;
   }
 
-  header {
-    padding: 0.4rem 0;
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header-left {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
   }
 
   .profile-pic {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
 
   #name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    text-align: center;
   }
 
   #tagline {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .nav-bar {
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
   .nav-bar a {
-    font-size: 0.85rem;
-    padding: 4px 6px;
+    font-size: 1rem;
+    padding: 4px 8px;
   }
 
   .controls {
-    flex-direction: column;
-    gap: 0.3rem;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
   }
 
   #lang-switcher,
   #theme-toggle {
-    font-size: 0.85rem;
-    padding: 4px 6px;
+    font-size: 0.8rem;
+    padding: 4px 8px;
   }
 }
