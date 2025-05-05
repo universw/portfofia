@@ -161,7 +161,6 @@
       <button onclick="loginWithFacebook()" class="btn" data-i18n="facebook_login_btn">Login with Facebook</button>
       <button onclick="userLogout()" class="btn" data-i18n="logout_btn">Logout</button>
     </section>
-    <div id="notification" class="notification"></div>
   
     <!-- Contact Section -->
     <section id="contact" class="container section" style="display: none;">
@@ -191,6 +190,11 @@
       </form>
     </section>
   </main>
+  <div id="notification" class="notification">
+    <span id="notification-icon" class="icon">ℹ️</span>
+    <span id="notification-text" class="message">Message</span>
+    <span id="notification-close" class="close-btn" onclick="hideNotification()">×</span>
+  </div>
   
   <!-- Footer -->
   <footer class="container footer" data-i18n="footer">
