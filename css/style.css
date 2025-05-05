@@ -402,48 +402,22 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 280px;
+  min-width: 300px;
   max-width: 90%;
   padding: 20px 30px;
   border-radius: 12px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
   display: flex;
   align-items: center;
-  gap: 12px;
   justify-content: center;
-  color: white;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  gap: 12px;
+  color: #ff4d4d; /* Strong red text */
+  background-color: #111; /* Dark black background */
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); /* subtle red glow */
+  border: 2px solid #ff4d4d;
   opacity: 0;
   pointer-events: none;
   z-index: 9999;
   transition: opacity 0.4s ease, transform 0.3s ease;
 }
-
-.notification.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1.05);
-}
-
-.notification .icon {
-  font-size: 22px;
-}
-
-.notification .message {
-  flex: 1;
-}
-
-.notification .close-btn {
-  cursor: pointer;
-  font-weight: bold;
-  margin-left: 12px;
-  font-size: 20px;
-}
-
-/* Types */
-.notification.success    { background-color: #28a745; }
-.notification.error      { background-color: #dc3545; }
-.notification.info       { background-color: #17a2b8; }
-.notification.warning    { background-color: #ffc107; color: #333; }
