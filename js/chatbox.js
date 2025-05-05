@@ -16,16 +16,18 @@ chatForm?.addEventListener("submit", (e) => {
       text: message,
       sender: user.email || "user",
       timestamp: Date.now()
+    }).then(() => {
+      showNotification("Message sent");
+    }).catch(err => {
+      showNotification("Failed to send message: " + err.message);
     });
     chatInput.value = "";
   } else {
-    if (typeof showNotification === "function") {
-      showNotification("You must be logged in to send a message.");
-    }
+    showNotification("You must be logged in to send a message.");
   }
 });
 
-// Display messages
+// Listen for new messages
 chatRef.on("child_added", (snapshot) => {
   const data = snapshot.val();
   const key = snapshot.key;
@@ -41,8 +43,12 @@ chatRef.on("child_added", (snapshot) => {
   delBtn.className = "delete-btn";
   delBtn.onclick = () => {
     if (confirm("Delete this message?")) {
-      chatRef.child(key).remove();
-      msgDiv.remove();
+      chatRef.child(key).remove().then(() => {
+        msgDiv.remove();
+        showNotification("Message deleted");
+      }).catch(err => {
+        showNotification("Delete failed: " + err.message);
+      });
     }
   };
 
