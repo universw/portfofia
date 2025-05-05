@@ -20,7 +20,6 @@
           <p id="tagline" data-i18n="tagline">Multilingual Developer | IT Enthusiast | Avid Reader and Traveler</p>
         </div>
       </div>
-
       <nav class="nav-bar">
         <a href="#about" data-i18n="nav_about">About Me</a>
         <a href="#resume" data-i18n="nav_resume">Resume</a>
@@ -30,7 +29,6 @@
         <a href="#contact" data-i18n="nav_contact">Contact</a>
         <a href="#chatbox" data-i18n="nav_chatbox">Chat</a>
       </nav>
-
       <div class="controls">
         <select id="lang-switcher">
           <option value="en">EN</option>
@@ -42,9 +40,8 @@
       </div>
     </div>
   </header>
-    <!-- Main Content -->
-  <main>
 
+  <main>
     <!-- About Section -->
     <section id="about" class="container section">
       <h2 data-i18n="about_title">About Me</h2>
@@ -76,15 +73,11 @@
         <li data-i18n="cert_mos">MOS Certification</li>
       </ul>
 
-      <a href="assets/resume/Henry_Resume.pdf" class="btn" download="Henry_Resume.pdf" data-i18n="download_resume">
+      <a href="assets/resume/Henry_Resume.pdf" class="btn" download data-i18n="download_resume">
         Download Resume (PDF)
       </a>
-      <p style="font-size: 0.8rem; color: gray;">
-        *On iPhone, long-press the button above and select “Download Linked File” to save the resume.
-      </p>
     </section>
-
-    <!-- Motivation Section -->
+        <!-- Motivation Section -->
     <section id="motivation" class="container section">
       <h2 data-i18n="motivation_title">Motivation for Application</h2>
       <p data-i18n="motivation_text">
@@ -126,13 +119,13 @@
         <div class="project-item">
           <img src="assets/images/snake.jpg" alt="Snake Game" />
           <h3 data-i18n="snake_game_title">Snake Game</h3>
-          <p data-i18n="snake_game_desc">Classic snake game made with pure HTML/CSS/JavaScript.</p>
+          <p data-i18n="snake_description">Classic snake game made with pure HTML/CSS/JavaScript.</p>
           <a href="#snake" class="btn" data-i18n="play_button">Play Now</a>
         </div>
         <div class="project-item">
           <img src="assets/images/resume-site.jpg" alt="Portfolio Website" />
-          <h3 data-i18n="portfolio_title">My Portfolio Website</h3>
-          <p data-i18n="portfolio_desc">A multilingual personal site with embedded games.</p>
+          <h3 data-i18n="portfolio_title">Portfolio Website</h3>
+          <p data-i18n="portfolio_desc">A multilingual personal site with embedded game and live chat.</p>
           <a href="https://portfove.vercel.app" class="btn" data-i18n="view_more">View More</a>
         </div>
       </div>
@@ -140,20 +133,20 @@
         <iframe src="snake/snake.html" frameborder="0" class="snake-iframe"></iframe>
       </div>
     </section>
-
-    <!-- Skills Section -->
+        <!-- Skills Section -->
     <section id="skills" class="container section">
       <h2 data-i18n="skills_title">Skills</h2>
       <ul class="skills-list">
         <li data-i18n="skill_html">HTML, CSS, JavaScript</li>
         <li data-i18n="skill_java">Java</li>
-        <li data-i18n="skill_itpassport">IT Passport (currently studying for FE)</li>
+        <li data-i18n="skill_itpassport">IT Passport (currently studying for Fundamental IT Engineer Exam)</li>
         <li data-i18n="skill_webcreator">Web Creator</li>
-        <li data-i18n="skill_office">MS Excel, Word, PowerPoint, Access</li>
+        <li data-i18n="skill_office">Microsoft Excel, Word, PowerPoint, Access</li>
         <li data-i18n="skill_languages">English / Japanese / Vietnamese / Chinese (HSK1)</li>
       </ul>
     </section>
-        <!-- Login Reminder -->
+
+    <!-- Login Reminder -->
     <div id="login-reminder" class="reminder-box" data-i18n="login_reminder">
       Please log in or sign up to use the contact form and chat features.
     </div>
@@ -161,7 +154,7 @@
     <!-- User Authentication Section -->
     <section id="user-login" class="container section">
       <h2 data-i18n="auth_section_title">User Login & Signup</h2>
-      <input type="email" id="user-email" placeholder="Email" />
+      <input type="email" id="user-email" placeholder="Email" data-i18n-placeholder="contact_email" />
       <input type="password" id="user-password" placeholder="Password" />
       <button onclick="signUpWithEmail()" class="btn" data-i18n="signup_btn">Sign Up</button>
       <button onclick="loginWithEmail()" class="btn" data-i18n="login_btn">Login</button>
@@ -179,12 +172,12 @@
         <a href="mailto:hennryhoangquanw@ymail.ne.jp" class="btn" data-i18n="email">Email</a>
         <a href="https://www.linkedin.com/in/henry-hoangquan-nguyen-48075a361" class="btn" target="_blank" data-i18n="linkedin_link">LinkedIn</a>
         <a href="https://www.facebook.com/share/1Hc4c5eVrS/?mibextid=wwXIfr" class="btn" target="_blank" data-i18n="facebook_link">Facebook</a>
-        <a href="https://github.com/universw" class="btn" target="_blank">GitHub</a>
+        <a href="https://github.com/universw" class="btn" target="_blank" data-i18n="github_link">GitHub</a>
       </div>
       <form id="contact-form">
-        <input type="text" placeholder="Name" required />
-        <input type="email" placeholder="Email" required />
-        <textarea placeholder="Message" required></textarea>
+        <input type="text" placeholder="Name" required data-i18n-placeholder="contact_name" />
+        <input type="email" placeholder="Email" required data-i18n-placeholder="contact_email" />
+        <textarea placeholder="Message" required data-i18n-placeholder="contact_message"></textarea>
         <button type="submit" class="btn" data-i18n="send_button">Send</button>
       </form>
     </section>
@@ -194,22 +187,24 @@
       <h2 data-i18n="chatbox_title">Live Chat</h2>
       <div id="chat-messages"></div>
       <form id="chat-form">
-        <input type="text" id="chat-input" placeholder="Type your message..." required />
+        <input type="text" id="chat-input" placeholder="Type your message..." required data-i18n-placeholder="chat_input_placeholder" />
         <button type="submit" class="btn" data-i18n="send_button">Send</button>
       </form>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="container footer">
-    <p data-i18n="footer">© 2025 Henry HoangQuan Nguyen. All rights reserved.</p>
+  <footer class="container footer" data-i18n="footer">
+    © 2025 Henry HoangQuan Nguyen. All rights reserved.
   </footer>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <!-- Scripts -->
   <script src="js/lang.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="js/chatbox.js"></script>
-  <script src="js/contact-form.js"></script>
 </body>
 </html>
