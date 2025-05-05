@@ -1,95 +1,82 @@
-// Firebase Auth Providers
-const facebookProvider = new firebase.auth.FacebookAuthProvider();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-const githubProvider = new firebase.auth.GithubAuthProvider();
-
-// === EMAIL SIGNUP ===
-function signUpWithEmail() {
-  const email = document.getElementById('user-email').value;
-  const password = document.getElementById('user-password').value;
-
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      console.log("Signup successful", userCredential.user);
-    })
-    .catch((error) => {
-      console.error("Signup error:", error.message);
-    });
-}
-
-// === EMAIL LOGIN ===
-function loginWithEmail() {
-  const email = document.getElementById('user-email').value;
-  const password = document.getElementById('user-password').value;
-
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      console.log("Login successful", userCredential.user);
-    })
-    .catch((error) => {
-      console.error("Login error:", error.message);
-    });
-}
-
-// === GOOGLE LOGIN ===
-function loginWithGoogle() {
-  firebase.auth().signInWithPopup(googleProvider)
-    .then((result) => {
-      console.log("Google login successful", result.user);
-    })
-    .catch((error) => {
-      console.error("Google login error:", error.message);
-    });
-}
-
-// === GITHUB LOGIN ===
-function loginWithGithub() {
-  firebase.auth().signInWithPopup(githubProvider)
-    .then((result) => {
-      console.log("GitHub login successful", result.user);
-    })
-    .catch((error) => {
-      console.error("GitHub login error:", error.message);
-    });
-}
-
-// === FACEBOOK LOGIN ===
-function loginWithFacebook() {
-  firebase.auth().signInWithPopup(facebookProvider)
-    .then((result) => {
-      console.log("Facebook login successful", result.user);
-    })
-    .catch((error) => {
-      console.error("Facebook login error:", error.message);
-    });
-}
-
-// === LOGOUT ===
-function userLogout() {
-  firebase.auth().signOut()
-    .then(() => {
-      console.log("User logged out");
-    })
-    .catch((error) => {
-      console.error("Logout error:", error.message);
-    });
-}
-
-// === CHECK USER STATUS ===
-firebase.auth().onAuthStateChanged((user) => {
-  const chatbox = document.getElementById('chatbox');
-  const contact = document.getElementById('contact');
-  const reminder = document.getElementById('login-reminder');
-
-  if (user) {
-    // User is logged in
-    if (chatbox) chatbox.style.display = 'block';
-    if (contact) contact.style.display = 'block';
-    if (reminder) reminder.style.display = 'none';
-  } else {
-    // User is logged out
-    if (chatbox) chatbox.style.display = 'none';
-    if (contact) contact.style.display = 'none';
-    if (reminder) reminder.style.display = 'block';
+// Toast-style notification
+function showNotification(message, duration = 3000) {
+    const box = document.getElementById("notification");
+    if (!box) return;
+    box.textContent = message;
+    box.classList.add("show");
+    setTimeout(() => {
+      box.classList.remove("show");
+    }, duration);
   }
-});
+  
+  const auth = firebase.auth();
+  
+  // === AUTH FUNCTIONS ===
+  
+  function signUpWithEmail() {
+    const email = document.getElementById("user-email").value;
+    const password = document.getElementById("user-password").value;
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(userCred => showNotification("Signed up: " + userCred.user.email))
+      .catch(err => showNotification("Signup failed: " + err.message));
+  }
+  
+  function loginWithEmail() {
+    const email = document.getElementById("user-email").value;
+    const password = document.getElementById("user-password").value;
+    auth.signInWithEmailAndPassword(email, password)
+      .then(userCred => showNotification("Logged in: " + userCred.user.email))
+      .catch(err => showNotification("Login failed: " + err.message));
+  }
+  
+  function loginWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(res => showNotification("Google login: " + res.user.displayName))
+      .catch(err => showNotification("Google login failed: " + err.message));
+  }
+  
+  function loginWithGithub() {
+    const provider = new firebase.auth.GithubAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(res => showNotification("GitHub login: " + res.user.displayName))
+      .catch(err => showNotification("GitHub login failed: " + err.message));
+  }
+  
+  function loginWithFacebook() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(res => showNotification("Facebook login: " + res.user.displayName))
+      .catch(err => showNotification("Facebook login failed: " + err.message));
+  }
+  
+  function userLogout() {
+    auth.signOut()
+      .then(() => showNotification("Logged out"))
+      .catch(err => showNotification("Logout failed: " + err.message));
+  }
+  
+  // Expose to HTML
+  window.signUpWithEmail = signUpWithEmail;
+  window.loginWithEmail = loginWithEmail;
+  window.loginWithGoogle = loginWithGoogle;
+  window.loginWithGithub = loginWithGithub;
+  window.loginWithFacebook = loginWithFacebook;
+  window.userLogout = userLogout;
+  
+  // Auth state UI updates
+  auth.onAuthStateChanged(user => {
+    const chatbox = document.getElementById("chatbox");
+    const contact = document.getElementById("contact");
+    const reminder = document.getElementById("login-reminder");
+  
+    if (user) {
+      if (chatbox) chatbox.style.display = "block";
+      if (contact) contact.style.display = "block";
+      if (reminder) reminder.style.display = "none";
+    } else {
+      if (chatbox) chatbox.style.display = "none";
+      if (contact) contact.style.display = "none";
+      if (reminder) reminder.style.display = "block";
+    }
+  });
