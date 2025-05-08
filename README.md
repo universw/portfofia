@@ -1,29 +1,29 @@
-# portfoliox 
-Henry HoangQuan # Henry HoangQuan Nguyen's Portfolio
+# Portfofia Portfolio Website
 
-Welcome to my personal portfolio website! This site showcases my projects, skills, and experiences in web development, AI, cybersecurity, and cloud.
+This is a multilingual personal portfolio website created by **Henry HoangQuan Nguyen**. It includes interactive features such as a Snake Game, live chatbox, contact form, and user authentication via Firebase.
 
 ## Features
 
-- AI Chatbot
-- Game integration (Snake)
-- Multilingual support (EN, JP, VI, CN)
-- Firebase/Supabase integration
-- Responsive design
-- Voice assistant
+- Responsive layout with language switcher (English, Japanese, Vietnamese, Chinese)
+- Real-time chatbox powered by Firebase
+- Embedded Snake Game using HTML/CSS/JS
+- Secure user login with Email, Google, GitHub, Facebook (via Firebase Authentication)
+- Contact form and resume download
+- Hosted on Firebase and integrated with internationalization
 
-## Tech Stack
+## Technologies Used
 
-- HTML / CSS / JavaScript
-- Firebase / Supabase
-- Dialogflow / OpenAI
-- GitHub Pages / Vercel
+- HTML, CSS, JavaScript
+- Firebase (Authentication, Realtime Database)
+- JSON for multilingual support
+- Firebase Hosting
 
-## How to View
+## Third-Party Services
 
-Visit the live site here: [https://portfolioprojectwx.github.io/portfo]
+This project uses **Firebase**, which is licensed under the **Apache License 2.0**.  
+Firebase is used for backend features such as authentication, chatbox, and form submissions.
 
-## Contact
+## Disclaimer
 
-- LinkedIn: [https://www.linkedin.com/in/hoangquan-nguyen-henry-48075a361]
-- Email: henryhoangquanw@outlook.com
+This is an original project by Henry HoangQuan Nguyen.  
+While some tools and SDKs (like Firebase) are used, the original source code and design are independently created and protected under the MIT License.
