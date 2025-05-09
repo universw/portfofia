@@ -25,5 +25,4 @@ Firebase is used for backend features such as authentication, chatbox, and form 
 
 ## Disclaimer
 
-This is an original project by Henry HoangQuan Nguyen.  
-While some tools and SDKs (like Firebase) are used, the original source code and design are independently created and protected under the MIT License.
+This is an original project by Henry HoangQuan Nguyen. 
