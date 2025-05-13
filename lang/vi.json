@@ -84,5 +84,7 @@
   "comment_section_title": "Sổ lưu bút & Bình luận",
   "comment_name": "Tên của bạn",
   "comment_message": "Viết bình luận của bạn...",
-   "submit_comment": "Gửi bình luận"
+   "submit_comment": "Gửi bình luận",
+   "skill_backend": "RENDER / FIREBASE / VS Code (Trình chỉnh sửa mã) / IntelliJ IDEA / Eclipse IDE",
+   "skill_git": "GitHub / GitLab"
 }

@@ -84,5 +84,7 @@
   "comment_section_title": "留言簿与评论",
   "comment_name": "你的名字",
   "comment_message": "写下你的评论...",
-  "submit_comment": "发表评论"
+  "submit_comment": "发表评论",
+  "skill_backend": "RENDER / FIREBASE / VS Code（代码编辑器）/ IntelliJ IDEA（集成开发环境）/ Eclipse IDE（集成开发环境）",
+   "skill_git": "GitHub / GitLab（代码托管平台）"
 }

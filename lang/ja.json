@@ -84,5 +84,7 @@
   "comment_section_title": "ゲストブックとコメント",
   "comment_name": "あなたの名前",
   "comment_message": "コメントを入力してください...",
-  "submit_comment": "コメントを投稿"
+  "submit_comment": "コメントを投稿",
+  "skill_backend": "RENDER / FIREBASE / VS Code（ブイエスコード）/ IntelliJ IDEA（インテリジェイ）/ Eclipse IDE（エクリプス）",
+  "skill_git": "GitHub / GitLab（ギットラボ）"
 }
