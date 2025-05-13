@@ -11,9 +11,8 @@
   "nav_chatbox": "Trò chuyện",
 
   "about_title": "Giới thiệu bản thân",
-  "about_description": "Xin chào! Tôi là Henry, một lập trình viên đa ngôn ngữ đang sống tại Nhật Bản với niềm đam mê công nghệ, phát triển bản thân và khám phá các nền văn hóa khác nhau. Tôi nói tiếng Anh, tiếng Nhật, tiếng Việt và tiếng Trung cơ bản. Hiện tại, tôi đang tập trung xây dựng sự nghiệp trong lĩnh vực Cloud và DevOps, với mục tiêu đóng góp cho các dự án CNTT sáng tạo và phát triển thành một kỹ sư sẵn sàng cho tương lai.",
-
-  "resume_title": "Sơ yếu lý lịch",
+  "about_description": "Xin chào, mình là Henry — một lập trình viên đa ngôn ngữ đầy nhiệt huyết hiện đang sinh sống tại Nhật Bản. Mình có thể sử dụng tiếng Anh, tiếng Nhật, tiếng Việt và tiếng Trung cơ bản. Mình đam mê công nghệ, không ngừng học hỏi và yêu thích làm việc trong môi trường đa văn hóa. Hiện tại, mình đang tập trung phát triển sự nghiệp trong lĩnh vực Cloud và DevOps (AWS, Azure, GCP, Vercel), với mục tiêu đóng góp cho các dự án công nghệ sáng tạo và trở thành một kỹ sư sẵn sàng cho tương lai.",
+   "resume_title": "Sơ yếu lý lịch",
   "education": "Học vấn",
   "edu_akamonkai": "Trường Nhật ngữ Akamonkai (2018–2020)",
   "edu_chibamode": "Trường Chiba Mode Business College - Khóa học CNTT quốc tế (2023–2025)",
