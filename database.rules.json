@@ -1,6 +1,3 @@
-{
-  "rules": {
-    ".read": "now < 1748617200000",  // 2025-5-31
-    ".write": "now < 1748617200000",  // 2025-5-31
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b4d32696346720dc87ef9a7e8e5ac3badc6a7a44bd9f1060e7a6dc61be3a20db
+size 121
