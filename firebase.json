@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "public",  // <--- IMPORTANT: Verify this directory name for your website's files
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
