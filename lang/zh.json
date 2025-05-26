@@ -42,8 +42,9 @@
    "akamonkai_japanese_school": "赤门会日本语学校",
 
   "projects_title": "项目",
-  "napresentation_title": "创业演讲",
+  "presentation_title": "创业演讲",
   "presentation_desc": "我在千叶Mode商业专门学校用日语进行的创业演讲",
+  "view_full_video": "在YouTube上观看完整视频",
   "snake_game_title": "贪吃蛇游戏",
   "snake_description": "使用 HTML/CSS/JavaScript 制作的经典贪吃蛇游戏。",
   "play_button": "立即游戏",
