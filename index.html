@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -271,6 +273,23 @@
     };
     firebase.initializeApp(firebaseConfig);
   </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const playButton = document.querySelector('a[href="#snake"]');
+    const snakeContainer = document.getElementById("snake");
+
+    if (playButton && snakeContainer) {
+      playButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        snakeContainer.style.display = "block";
+        window.scrollTo({
+          top: snakeContainer.offsetTop,
+          behavior: "smooth"
+        });
+      });
+    }
+  });
+</script>
 
   <!-- Custom Scripts -->
   <script src="js/lang.js"></script>

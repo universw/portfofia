@@ -207,18 +207,6 @@ header {
   transform: translateY(-5px);
 }
 
-/* =============== SNAKE GAME =============== */
-.snake-container {
-  margin-top: 2rem;
-}
-
-.snake-iframe {
-  width: 100%;
-  max-width: 500px;
-  height: 500px;
-  border: 2px solid var(--primary-color);
-  border-radius: 12px;
-}
 
 /* =============== CONTACT =============== */
 .social-buttons {
@@ -540,4 +528,25 @@ header {
 }
 .youtube-btn:hover {
   background-color: #cc0000;
+}
+/* =============== SNAKE GAME =============== */
+
+
+.snake-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+
+.snake-iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 620px;
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+button:focus, a:focus, input:focus, textarea:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }

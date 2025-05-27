@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}
