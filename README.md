@@ -55,7 +55,7 @@ I'm an aspiring **DevOps and Cloud Engineer**, passionate about building scalabl
 - 📘 Studied Japanese at **Akamonkai Language School**  
 - 🛠️ Currently learning **AWS**, **GCP**, **Azure**, **Docker**, **Kubernetes**, **CI/CD pipelines**, and **Linux**
 - 🧠 Preparing for the **FE (Fundamental Information Technology Engineer)** exam
-- 🗣️ Trilingual: Japanese (JLPT N2 - 2019), English (TOEIC 590 - 2021), Vietnamese (Native), Chinese (HSK1)
+- 🗣️ Trilingual: Japanese (JLPT N2 - 2019), English (TOEIC 665 - 2025), Vietnamese (Native), Chinese (HSK1)
 
 ---
 
